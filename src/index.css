@@ -15,6 +15,7 @@
   --accent2: #8c00ff;
   --card-hover: rgba(140, 0, 255, 0.06);
   --dot: rgba(112, 0, 204, 0.55);
+  --card: #ffffff;
 }
 
 :root.dark {
@@ -28,6 +29,7 @@
   --accent2: #c77dff;
   --card-hover: rgba(181, 75, 255, 0.07);
   --dot: rgba(255, 255, 255, 0.22);
+  --card: #161412;
 }
 
 /* Map the variables to Tailwind utilities: bg-bg, text-ink, border-line, etc. */
@@ -41,6 +43,7 @@
   --color-accent: var(--accent);
   --color-accent-2: var(--accent2);
   --color-card-hover: var(--card-hover);
+  --color-card: var(--card);
   --font-serif: "Fraunces", serif;
   --font-sans: "Manrope", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useTheme from '../hooks/useTheme'
 
 const navLinks = [
@@ -25,16 +26,39 @@ function MoonIcon() {
   )
 }
 
+function MenuIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  )
+}
+
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  )
+}
+
 function Navbar() {
   const { theme, toggleTheme } = useTheme()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <nav className="sticky top-0 z-50 border-b border-line bg-bg">
-      <div className="mx-auto flex max-w-[960px] items-center justify-between gap-5 px-8 py-5">
-        <a href="#top" className="font-serif text-[19px] font-semibold tracking-tight text-ink">
+      <div className="mx-auto flex max-w-[960px] items-center justify-between gap-5 px-5 py-5 sm:px-8">
+        <a
+          href="#top"
+          onClick={() => setMenuOpen(false)}
+          className="font-serif text-[19px] font-semibold tracking-tight text-ink"
+        >
           Karan Shukla
         </a>
-        <div className="flex flex-wrap items-center gap-4 sm:gap-[26px]">
+
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-[26px] md:flex">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -52,7 +76,44 @@ function Navbar() {
             {theme === 'light' ? <SunIcon /> : <MoonIcon />}
           </button>
         </div>
+
+        {/* Mobile controls */}
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="grid h-8 w-8 cursor-pointer place-items-center rounded-full border border-line-2 text-ink"
+          >
+            {theme === 'light' ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            className="grid h-8 w-8 cursor-pointer place-items-center rounded-full border border-line-2 text-ink"
+          >
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div className="border-t border-line bg-bg px-5 py-2 md:hidden">
+          <div className="flex flex-col">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-line py-3 text-[14.5px] font-medium text-ink-2 last:border-b-0 hover:text-accent"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   )
 }

@@ -7,7 +7,7 @@ function Section({ id, number, label, decoration, children }) {
   const revealRef = useReveal()
 
   return (
-    <section id={id} className="relative mx-auto max-w-[960px] border-t border-line px-8 py-[60px]">
+    <section id={id} className="relative mx-auto max-w-[960px] border-t border-line px-5 py-[60px] sm:px-8">
       {decoration}
       <div ref={revealRef} className="reveal relative z-10 grid gap-8 md:grid-cols-[120px_1fr]">
         <div className="font-mono text-[13px] text-accent">

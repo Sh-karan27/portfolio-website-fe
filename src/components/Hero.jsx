@@ -75,7 +75,7 @@ function Hero({ data, socialLinks }) {
         </svg>
       </div>
 
-      <section id="top" className="relative z-10 mx-auto max-w-[960px] px-8 pb-[70px] pt-[100px]">
+      <section id="top" className="relative z-10 mx-auto max-w-[960px] px-5 pb-[70px] pt-[100px] sm:px-8">
         <div className="fade-up font-mono text-[13px] text-accent">
           {data.sectionNumber} — {data.sectionLabel}
         </div>

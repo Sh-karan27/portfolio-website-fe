@@ -92,7 +92,7 @@ function Projects({ data }) {
       </div>
 
       {view === 'cards' ? (
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] border-l border-t border-line">
+        <div className="grid grid-cols-1 border-l border-t border-line sm:grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
           {data.items.map((project) => (
             <ProjectCard key={project._id || project.number} project={project} />
           ))}
