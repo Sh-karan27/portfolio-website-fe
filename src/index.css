@@ -51,6 +51,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Reserve the scrollbar's width permanently so locking body scroll
+     (mobile menu open) never shifts the page layout mid-transition. */
+  scrollbar-gutter: stable;
 }
 
 body {
