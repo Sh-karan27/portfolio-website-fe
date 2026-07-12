@@ -7,6 +7,17 @@ export async function getPortfolioContent() {
   return json.data
 }
 
+export async function getProjectBySlug(slug) {
+  const res = await fetch(`${API_BASE_URL}/content/projects/${slug}`)
+  if (!res.ok) {
+    const error = new Error(`Failed to fetch project (${res.status})`)
+    error.status = res.status
+    throw error
+  }
+  const json = await res.json()
+  return json.data
+}
+
 // Throws an Error with a `status` property so callers can branch on
 // status === 401 (e.g. to detect an expired admin session).
 async function throwApiError(res, fallbackMessage) {

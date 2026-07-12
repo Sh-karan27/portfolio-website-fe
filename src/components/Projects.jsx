@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Section from './Section'
 import useParallax from '../hooks/useParallax'
 
@@ -26,38 +27,64 @@ function LaptopDecoration() {
 function ProjectCard({ project }) {
   return (
     <div className="project-card border-b border-r border-line p-[26px]">
+      {project.coverImage && (
+        <img
+          src={project.coverImage}
+          alt=""
+          className="mb-3.5 h-14 w-14 rounded-[2px] border border-line-2 object-cover"
+        />
+      )}
       <div className="font-mono text-xs text-ink-3">{project.number}</div>
       <div className="mt-2 font-serif text-[19px] font-semibold">{project.title}</div>
       <p className="mt-2.5 text-[14.5px] leading-[1.6] text-ink-2">{project.description}</p>
       <div className="mt-3.5 font-mono text-xs text-ink-3">{project.stack}</div>
-      <a
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-3.5 inline-block text-[13.5px] font-semibold"
-      >
-        GitHub <span className="project-arrow">↗</span>
-      </a>
+      <div className="mt-3.5 flex flex-wrap items-center gap-4">
+        <Link to={`/projects/${project.slug}`} className="inline-block text-[13.5px] font-semibold">
+          View Details <span className="project-arrow">↗</span>
+        </Link>
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-[13.5px] font-semibold"
+        >
+          GitHub <span className="project-arrow">↗</span>
+        </a>
+      </div>
     </div>
   )
 }
 
 function ProjectRow({ project }) {
   return (
-    <div className="grid grid-cols-[1fr_auto] items-start gap-5 border-t border-line py-[22px]">
-      <div>
-        <div className="font-serif text-lg font-semibold">{project.title}</div>
-        <p className="mt-2.5 max-w-[56ch] text-[14.5px] leading-[1.6] text-ink-2">{project.description}</p>
-        <div className="mt-2.5 font-mono text-xs text-ink-3">{project.stack}</div>
+    <div className="flex items-start gap-4 border-t border-line py-[22px] sm:gap-5">
+      {project.coverImage && (
+        <img
+          src={project.coverImage}
+          alt=""
+          className="h-20 w-20 flex-shrink-0 rounded-[2px] border border-line-2 object-cover sm:h-28 sm:w-28"
+        />
+      )}
+      <div className="flex min-w-0 flex-1 flex-wrap items-start justify-between gap-5">
+        <div>
+          <div className="font-serif text-lg font-semibold">{project.title}</div>
+          <p className="mt-2.5 max-w-[56ch] text-[14.5px] leading-[1.6] text-ink-2">{project.description}</p>
+          <div className="mt-2.5 font-mono text-xs text-ink-3">{project.stack}</div>
+        </div>
+        <div className="flex flex-wrap items-center gap-4">
+          <Link to={`/projects/${project.slug}`} className="whitespace-nowrap text-[13.5px] font-semibold">
+            View Details ↗
+          </Link>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="whitespace-nowrap text-[13.5px] font-semibold"
+          >
+            GitHub ↗
+          </a>
+        </div>
       </div>
-      <a
-        href={project.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="whitespace-nowrap text-[13.5px] font-semibold"
-      >
-        GitHub ↗
-      </a>
     </div>
   )
 }
