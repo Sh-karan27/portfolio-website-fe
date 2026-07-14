@@ -6,7 +6,7 @@ function About({ data }) {
     <Section id="about" number={data.sectionNumber} label={data.sectionLabel}>
       <div className="flex flex-wrap items-start gap-[26px]">
         <img
-          src={profilePhoto}
+          src={data.photoUrl || profilePhoto}
           alt="Karan Shukla"
           className="h-[170px] w-[170px] shrink-0 rounded border border-line object-cover"
         />

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import FormField from '../FormField'
+import ImageUploadField from '../ImageUploadField'
 import { SectionHeader, SaveBar } from '../SectionFormChrome'
 import { updateSection } from '../../../lib/api'
 
@@ -12,6 +13,12 @@ function AboutForm({ data, onSaved, onAuthExpired }) {
 
   const set = (field) => (e) => {
     setForm((f) => ({ ...f, [field]: e.target.value }))
+    setDirty(true)
+    setSaved(false)
+  }
+
+  const setPhoto = (url) => {
+    setForm((f) => ({ ...f, photoUrl: url }))
     setDirty(true)
     setSaved(false)
   }
@@ -62,6 +69,16 @@ function AboutForm({ data, onSaved, onAuthExpired }) {
       <FormField label="Section heading" serif value={form.heading} onChange={set('heading')} />
       <FormField label="Quote" as="textarea" rows={2} value={form.quote} onChange={set('quote')} />
       <FormField label="Bio" as="textarea" rows={6} value={form.bio} onChange={set('bio')} />
+
+      <div className="mb-4">
+        <ImageUploadField
+          label="Profile photo"
+          value={form.photoUrl}
+          onUploaded={setPhoto}
+          onAuthExpired={onAuthExpired}
+          folder="/portfolio/about"
+        />
+      </div>
 
       <div className="mb-2 mt-1 text-[12.5px] font-semibold text-ink-2">Stats</div>
       {form.stats.map((stat, i) => (
