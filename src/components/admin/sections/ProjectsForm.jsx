@@ -97,6 +97,7 @@ function ProjectsForm({ data, onSaved, onAuthExpired }) {
         title: '',
         description: '',
         stack: '',
+        tag: '',
         coverImage: '',
         githubUrl: '',
         liveUrl: '',
@@ -187,6 +188,15 @@ function ProjectsForm({ data, onSaved, onAuthExpired }) {
               <input
                 value={item.stack}
                 onChange={setItem(i, 'stack')}
+                className="field-input w-full rounded-[2px] border border-line-2 bg-bg px-3 py-2.5 font-mono text-[13px] text-ink focus:border-accent focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="mb-1.5 block text-[12.5px] font-semibold text-ink-2">Tag</label>
+              <input
+                value={item.tag || ''}
+                onChange={setItem(i, 'tag')}
+                placeholder="e.g. React"
                 className="field-input w-full rounded-[2px] border border-line-2 bg-bg px-3 py-2.5 font-mono text-[13px] text-ink focus:border-accent focus:outline-none"
               />
             </div>
